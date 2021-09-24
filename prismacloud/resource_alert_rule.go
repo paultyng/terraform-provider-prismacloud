@@ -274,6 +274,7 @@ func resourceAlertRule() *schema.Resource {
 									rule.TypeServiceNow,
 									rule.TypePagerDuty,
 									rule.TypeDemisto,
+									rule.TypeAwsS3,
 								},
 								false,
 							),
