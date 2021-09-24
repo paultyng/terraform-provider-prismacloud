@@ -61,7 +61,7 @@ You must specify at least one of the following:
 * `config_id` - Alert rule notification config ID
 * `frequency` - Frequency
 * `enabled` - (bool) Scan enabled
-* `recipients` - List of unique email addresses to notify
+* `recipients` - List of unique email addresses to notify (For email notifications), List of integration ids (For integrations without notification templates), or List of notification template ids (For integrations with notification templates)
 * `detailed_report` - (bool) Provide CSV detailed report
 * `with_compression` - (bool) Compress detailed report
 * `include_remediation` - (bool) Include remediation in detailed report

@@ -169,7 +169,7 @@ func dataSourceIntegration() *schema.Resource {
 						"url": {
 							Type:        schema.TypeString,
 							Computed:    true,
-							Description: "Webhook URL",
+							Description: "Webhook URL or Splunk HTTP event collector URL",
 						},
 						"headers": {
 							Type:        schema.TypeList,
@@ -208,7 +208,7 @@ func dataSourceIntegration() *schema.Resource {
 						"integration_key": {
 							Type:        schema.TypeString,
 							Computed:    true,
-							Description: "PagerDuty integration key",
+							Description: "PagerDuty/Splunk integration key",
 						},
 						"source_id": {
 							Type:        schema.TypeString,
@@ -219,6 +219,70 @@ func dataSourceIntegration() *schema.Resource {
 							Type:        schema.TypeString,
 							Computed:    true,
 							Description: "GCP Organization ID for Google CSCC integration",
+						},
+						"account_id": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "AWS account ID",
+						},
+						"regions": {
+							Type:        schema.TypeSet,
+							Computed:    true,
+							Description: "AWS regions",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"name": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "AWS region name",
+									},
+									"api_identifier": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "AWS region code",
+									},
+									"cloud_type": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "Cloud Type",
+									},
+									"sdk_id": {
+										Type:        schema.TypeString,
+										Computed:    true,
+										Description: "SDK ID",
+									},
+								},
+							},
+						},
+						"s3_uri": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "AWS S3 URI",
+						},
+						"region": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "AWS region",
+						},
+						"role_arn": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "AWS role ARN",
+						},
+						"external_id": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "AWS external ID",
+						},
+						"roll_up_interval": {
+							Type:        schema.TypeInt,
+							Computed:    true,
+							Description: "File Roll Up Time",
+						},
+						"source_type": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "Source type for splunk integration",
 						},
 					},
 				},
