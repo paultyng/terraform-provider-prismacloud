@@ -325,6 +325,7 @@ func resourcePolicy() *schema.Resource {
 										Elem: &schema.Schema{
 											Type: schema.TypeString,
 										},
+										ValidateDiagFunc: ValidateMetadata,
 									},
 									"type": {
 										Type:        schema.TypeString,
@@ -725,9 +726,23 @@ func savePolicy(d *schema.ResourceData, obj policy.Policy) {
 	}
 }
 
+func validateBuildPolicy(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
+	client := meta.(*pc.Client)
+	obj := parsePolicy(d, "")
+
+	if err := policy.ValidateBuildPolicy(client, obj); err != nil {
+		return diag.FromErr(err)
+	}
+	return nil
+}
+
 func createPolicy(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	client := meta.(*pc.Client)
 	obj := parsePolicy(d, "")
+
+	if diag := validateBuildPolicy(ctx, d, client); diag != nil {
+		return diag
+	}
 
 	if err := policy.Create(client, obj); err != nil {
 		return diag.FromErr(err)
