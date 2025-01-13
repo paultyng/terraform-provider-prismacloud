@@ -65,9 +65,12 @@ func resourceOrgCloudAccount() *schema.Resource {
 						},
 						"external_id": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "AWS account external ID",
 							Sensitive:   true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								return true
+							},
 						},
 						"group_ids": {
 							Type:        schema.TypeSet,
@@ -107,8 +110,11 @@ func resourceOrgCloudAccount() *schema.Resource {
 						},
 						"member_external_id": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "AWS Member account role's external ID",
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								return true
+							},
 						},
 						"member_role_status": {
 							Type:        schema.TypeBool,

@@ -67,9 +67,12 @@ func resourceCloudAccount() *schema.Resource {
 						},
 						"external_id": {
 							Type:        schema.TypeString,
-							Required:    true,
+							Optional:    true,
 							Description: "AWS account external ID",
 							Sensitive:   true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								return true
+							},
 						},
 						"group_ids": {
 							Type:        schema.TypeSet,
